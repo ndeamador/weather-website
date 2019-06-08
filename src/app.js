@@ -13,6 +13,8 @@ const geocode = require('./utils/geocode')
 // SECTION: Define paths for Express config
 // we call the express function above to create a new express appliaction
 const app = express()
+// puerto en el que se va a ejecutar la aplicación.
+const port = process.env.PORT || 3000
 
 const publicDirectoryPath = path.join(__dirname, '../public')
 
@@ -186,7 +188,6 @@ is an asynchornous process (though almost instant).
 The server remains up until we terminate it (That's why the terminal
 does not go back to the command prompt until we do ctrl+c). 
 To access our local develoment host in the browser: localhost:3000*/
-const port = 3000
 app.listen(port, () => {
     console.log('Server is up on port ' + port + '.')
 })
