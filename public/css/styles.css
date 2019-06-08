@@ -1,0 +1,63 @@
+body {
+    /* color: red; */
+    /* color: rgb(55, 148, 91); */
+    color: #333333;
+    font-family: arial;
+    max-width: 650px;
+    margin: 0 auto; /* Distancia entre el borde de la caja y los elementos externos. 0 es el margen arriba y abajo, auto a los lados */
+    padding: 0 16px; /* Distancia entre el borde de la caja y el contenido. para que haya todavia margen sin minimizamos */
+
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* especificamos esta línea porque el valor por defecto es row y nos deforma la página. */
+    min-height: 100vh; /* vh=viewport height (100 es la altura máxima del navegador) */
+}
+
+.main-content {
+    flex-grow: 1; /* Para que el elemento coja todo el espacio que necesite */
+}
+
+footer {
+    color: #888888;
+    border-top: 1px solid #eeeeee;
+    margin-top: 16px;
+    padding: 16px;
+}
+
+header {
+    margin-top: 16px;
+    margin-bottom: 48px;
+}
+
+h1 {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+header a {
+    color: #888888;
+    margin-right: 16px;
+    text-decoration: none;
+
+}
+
+.portrait {
+    width: 200px;
+}
+
+input {
+    border: 1px solid #cccccc;
+    padding: 8px;
+}
+
+button {
+    cursor: pointer;
+    border: 1px solid #888888; 
+    background: #888888;
+    color: white;
+    padding: 8px;
+}
+
+button:active {
+    background-color: #666666;
+
+}
