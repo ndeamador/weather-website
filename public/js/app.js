@@ -1,5 +1,3 @@
-console.log('Client side javascript file is loaded.')
-
 /* Fetch is not part of Javascript it's a client-side API, which means
 it's something we can use in all modern browsers, but it's not accessible
 in node.js, so we can only use it in client-side js files. */
