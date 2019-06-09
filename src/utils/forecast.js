@@ -28,10 +28,16 @@ const forecast = (latitude, longitude, callback) => {
             callback(body.error, undefined)
         } else {
             callback(undefined, {
-                summary: body.daily.data[0].summary,
+                summary: body.currently.summary,
                 temperature: body.currently.temperature,
                 precipProbability: body.currently.precipProbability,
+                icon: body.currently.icon,
+                todaySummary: body.daily.data[0].summary,
+                todayIcon: body.daily.data[0].icon,
+                temperatureHigh: body.daily.data[0].temperatureHigh,
+                temperatureLow: body.daily.data[0].temperatureLow,
             })
+
         }
     })
 }

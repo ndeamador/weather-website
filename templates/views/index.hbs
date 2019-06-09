@@ -1,20 +1,22 @@
 {{!-- El archivo hbs es simplemente un html con algunas características extra --}}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weather App</title> {{!-- El título que se ve en la pestaña del navegador. --}}
     <link rel="icon" href="/img/weather.png">
-<!--     el elemento link no tiene closing tag.
+    <!--     el elemento link no tiene closing tag.
     Podemos usar tanto una ruta relativa: ./css/styles.css (ruta en el DISCO DURO)
     o una ruta absoluta: /css/styles.css (que no tiene acceso al disco duro
     y es una referencia relativa a la ruta del web server que hemos llamado public)
-    El valor rel es el tipo de elemento que queremos introducir y href  --> 
+    El valor rel es el tipo de elemento que queremos introducir y href  -->
     <link rel="stylesheet" href="./css/styles.css">
-    
+
 </head>
+
 <body>
     <div class="main-content"> {{!-- creamos este div para dejar el footer fuera con flexbox. --}}
         {{>header}} {{!-- Añadimos un partial template: --}}
@@ -25,13 +27,27 @@
             <input placeholder="Type a location"> {{!-- no tiene closing tag. --}}
             <button>Search</button>
         </form>
-
         <p id="message-1"></p>
+
+        <h2 id="title-1"></h2>
         <p id="message-2"></p>
+        <figure class="skycons">
+            <canvas id="big-icon" width="256" height="256"></canvas>
+        </figure>
+        
+        <h2 id="title-2"></h2>
+    
+        <figure class="skycons">
+            <canvas id="small-icon" width="128" height="128"></canvas>
+        </figure>
+        <p id="message-3"></p>
+
     </div>
 
     {{>footer}}
 
+    <script src="https://rawgithub.com/darkskyapp/skycons/master/skycons.js"></script>
     <script src="/js/app.js"></script>
 </body>
+
 </html>

@@ -1,3 +1,7 @@
+var icons = new Skycons({ "color": "#333333" });
+icons.play();
+
+
 /* Fetch is not part of Javascript it's a client-side API, which means
 it's something we can use in all modern browsers, but it's not accessible
 in node.js, so we can only use it in client-side js files. */
@@ -28,6 +32,9 @@ const search = document.querySelector('input')
 // y por ser ids las seleccionamos con # delante del nombre.
 const messageOne = document.querySelector('#message-1')
 const messageTwo = document.querySelector('#message-2')
+const messageThree = document.querySelector('#message-3')
+const titleOne = document.querySelector('#title-1')
+const titleTwo = document.querySelector('#title-2')
 
 // cambiar el contenido de los parrafos de arriba en html:
 // messageOne.textContent = 'mensaje numero uno'
@@ -51,21 +58,48 @@ la página se carge por completo cada vez que hagamos una búsaqueda:
 
 weatherForm.addEventListener('submit', (e) => { //e stands for event, it's common in web development.
     e.preventDefault() // previene el comportamiento por defecto de la form
-    
+
     const location = search.value
 
     // limpiamos el valor que el parrafo pudiese tener de una busqueda anterior.
+
+
+
     messageOne.textContent = 'Loading...'
     messageTwo.textContent = ''
-    
-    fetch(`/weather?address=${location}`).then((response) => {
-    response.json().then((data) => {
-        if (data.error) {
-            messageOne.textContent = data.error
-        } else {
-            messageOne.textContent = `The forecast for ${data.geocodeAddress} (latitude: ${data.latitude}, longitude ${data.longitude}) is:`
-            messageTwo.textContent = `${data.forecast} It is currently ${data.temperature} degrees Celsius out. There is a ${data.precipProbability}% chance of rain.`
-        }
+    messageThree.textContent = ''
+    titleOne.textContent = ''
+    titleTwo.textContent = ''
+
+    var bigIcon = document.getElementById("big-icon")
+    var smallIcon = document.getElementById("small-icon")
+    bigIcon.style.display="none"
+    smallIcon.style.display="none"
+
+    fetch(`/weather?address=${location}`).then((response) => {       
+
+        response.json().then((data) => {
+            if (data.error) {
+                messageOne.textContent = data.error
+            } else {
+                bigIcon.style.display="block"
+                smallIcon.style.display="block"
+                const dotBigIcon = (data.icon.toUpperCase()).replace(/-/g, '_') // la g es para reemplazar todos los guiones, no solo el primero.
+                const dotSmallIcon = (data.todayIcon.toUpperCase()).replace(/-/g, '_')
+                console.log(dotBigIcon)
+                console.log(data.icon)
+                console.log(data.todayIcon)
+                console.log(dotSmallIcon)
+
+                icons.set("big-icon", Skycons[dotBigIcon])
+                icons.set("small-icon", Skycons[dotSmallIcon])
+
+                titleOne.textContent = 'Right now:'
+                titleTwo.textContent = 'Today:'
+                messageOne.textContent = `The forecast for ${data.geocodeAddress} (latitude: ${data.latitude}, longitude ${data.longitude}) is:`
+                messageTwo.textContent = `${data.forecast}. It is currently ${data.temperature} degrees Celsius out. There is a ${data.precipProbability}% chance of rain.`
+                messageThree.textContent = `Today's expected highest temperature is ${data.temperatureHigh} ºC and the lowest is ${data.temperatureLow} ºC. ${data.todaySummary}`
+            }
+        })
     })
-})
 })

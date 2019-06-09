@@ -9,7 +9,6 @@ const forecast = require('./utils/forecast')
 const geocode = require('./utils/geocode')
 
 
-
 // SECTION: Define paths for Express config
 // we call the express function above to create a new express appliaction
 const app = express()
@@ -109,7 +108,7 @@ app.get('/weather', (req, res) => {
                 return console.log(chalk.red.bold('Error:'), error)
             }
 
-            forecast(latitude, longitude, (error, { summary, temperature, precipProbability } = {}) => {
+            forecast(latitude, longitude, (error, { summary, temperature, precipProbability, icon, todaySummary, todayIcon, temperatureHigh, temperatureLow } = {}) => {
                 if (error) {
                     res.send({
                         error,
@@ -125,6 +124,11 @@ app.get('/weather', (req, res) => {
                     forecast: summary,
                     temperature,
                     precipProbability,
+                    icon,
+                    todaySummary,
+                    todayIcon,
+                    temperatureHigh,
+                    temperatureLow,
                 })
 
                 console.log(chalk.magenta('-------------------------------------------'))
@@ -132,10 +136,13 @@ app.get('/weather', (req, res) => {
                 console.log(chalk.bold('Latitude: ') + latitude)
                 console.log(chalk.bold('Longitude: ') + longitude)
                 console.log()
-                console.log(chalk.bold('Weather Report:'))
-                console.log(summary + ' It is currently ' + temperature +
-                    ' degrees out. There is a ' + precipProbability +
-                    '% chance of rain.')
+                console.log(chalk.bold.underline('Weather Report:'))
+                console.log(chalk.bold.gray('Current: ') + summary + '. It is currently ' + temperature +
+                    ' degrees Celsius out. There is a ' + precipProbability +
+                    ' % chance of rain.')
+                console.log(chalk.bold.gray('Today: ') + todaySummary + '. Expected highest temperature: ' + temperatureHigh +
+                    ' ºC. Expected lowest temperature: ' + temperatureLow +
+                    ' ºC.')
                 console.log(chalk.magenta('-------------------------------------------'))
             })
         })
